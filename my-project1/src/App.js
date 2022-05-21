@@ -1,10 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import Login from "./routes/Login";
+import Register from "./routes/Register";
+import AdmonPage from "./routes/AdmonPage";
 
 function App() {
   return (
-    <div >
-      <h1>hola mundo</h1>
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/admon" element={<AdmonPage />} />
+      </Routes>
     </div>
   );
 }

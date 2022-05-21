@@ -8,7 +8,7 @@ const Login = () => {
     password: "",
   });
 
-  const { signup } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
 
@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     setError(" ");
     try {
-      await signup(user.email, user.password);
+      await login(user.email, user.password);
       navigate("/admon");
     } catch (error) {
       console.log(error.code);
@@ -48,10 +48,10 @@ const Login = () => {
           onChange={handleChange}
         />
 
-        <button>Registrar</button>
+        <button>Login</button>
       </form>
     </div>
   );
 };
 
-export default Register;
+export default Login;

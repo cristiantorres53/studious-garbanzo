@@ -4,19 +4,27 @@ import Home from "./routes/Home";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
 import AdmonPage from "./routes/AdmonPage";
-import {AuthProvider} from "./context/authContext"
+import { AuthProvider } from "./context/authContext";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
   return (
     <div>
-     <AuthProvider>
-     <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/admon" element={<AdmonPage />} />
-      </Routes>
-     </AuthProvider>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/admon"
+            element={
+              <ProtectedRoute>
+                <AdmonPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </AuthProvider>
     </div>
   );
 }

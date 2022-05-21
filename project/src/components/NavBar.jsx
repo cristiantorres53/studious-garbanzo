@@ -1,15 +1,17 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserProvider";
 
 const NavBar = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user, logOutUSer } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleClickLogout = async () => {
     try {
-      await userSignOut();
+      await logOutUSer();
+      navigate("/Login");
     } catch (error) {
-      console.log(error);
+      console.log(error.code);
     }
   };
 
@@ -17,14 +19,14 @@ const NavBar = () => {
     <div>
       {user ? (
         <div>
-          <NavLink to="/">Inicio</NavLink>{" "}
+          <NavLink to="/Admon">Admon</NavLink>
           <button onClick={handleClickLogout}>Logout</button>
         </div>
       ) : (
         <div>
           <NavLink to="/Register">Registro</NavLink>
-          <NavLink to="/Admon">Admon</NavLink>
           <NavLink to="/Login">Login</NavLink>
+          <NavLink to="/">Inicio</NavLink>
         </div>
       )}
     </div>

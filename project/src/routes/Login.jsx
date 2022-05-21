@@ -4,8 +4,8 @@ import { UserContext } from '../context/UserProvider'
 
 const Login = () => {
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("cristiancamilotorresrodriguez@gmail.com");
+  const [password, setPassword] = useState("123456");
 
     const {login} = useContext(UserContext);
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Login = () => {
       console.log("procesando form", email, password);
       try {
         await login(email, password);
-        console.log("usuario logueado");
+        navigate("/Admon")
       } catch (error) {
         console.log(error.code);
       }

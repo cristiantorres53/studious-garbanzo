@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserProvider";
 
 const Register = () => {
@@ -6,13 +7,14 @@ const Register = () => {
   const [password, setPassword] = useState();
 
   const { register } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("procesando form", email, password);
     try {
       await register(email, password);
-      console.log("usuario creado");
+      navigate("/")
     } catch (error) {
       console.log(error.code);
     }

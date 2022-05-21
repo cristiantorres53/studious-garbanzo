@@ -3,7 +3,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "@firebase/auth";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { auth } from "../Firebase";
 
 export const UserContext = createContext();
@@ -14,22 +14,28 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (user) => {
       console.log(user);
+      if (user) {
+        const { uid, email, photoURL, displayName } = user;
+        setUser({ uid, email, photoURL, displayName });
+      } else {
+        setUser(null);
+      }
     });
 
     return () => unsuscribe();
   }, []);
 
-  const register = (email, password) =>
+  const registerUser = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password);
 
-  const login = (email, password) =>
+  const loginUser = (email, password) =>
     signInWithEmailAndPassword(auth, email, password);
 
-  const userSignOut = () => signOut(auth);
+  const logOutUSer = () => signOut(auth);
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, register, login, userSignOut }}
+      value={{ user, setUser, registerUser, loginUser, logOutUSer }}
     >
       {children}
     </UserContext.Provider>

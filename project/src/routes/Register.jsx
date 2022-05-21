@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../context/UserProvider";
 
 const Register = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const handleSubmit = (e) => {
+  const { register } = useContext(UserContext);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("procesando form", email, password);
+    try {
+      await register(email, password);
+      console.log("usuario creado");
+    } catch (error) {
+      console.log(error.code);
+    }
   };
 
   return (

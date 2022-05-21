@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from "react";
 
 const Login = () => {
-  return (
-    <div>Login</div>
-  )
-}
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  return <div>
+      <input type="email" placeholder="ingrese el email"/>
+      <input type="password" placeholder="ingrese la contraseña"/>
+  </div>;
+};
 
-export default Login
+export default Login;

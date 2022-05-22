@@ -1,18 +1,14 @@
 import { collection, getDocs } from "firebase/firestore/lite";
-import { useEffect, useState } from "react";
-import { db } from "../firebase";
+import { useState } from "react"; //useEffect
+import { db, auth } from "../firebase";
 
 export const useFirestore = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    console.log("getData");
-    getData();
-  }, []);
-
   const getData = async () => {
+    console.log(auth.currentUser);
     try {
       setLoading(true);
       const querySnapshot = await getDocs(collection(db, "properties"));
@@ -30,5 +26,6 @@ export const useFirestore = () => {
     data,
     error,
     loading,
+    getData,
   };
 };

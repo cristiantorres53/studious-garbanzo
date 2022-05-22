@@ -8,7 +8,7 @@ const Login = () => {
     password: "",
   });
 
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
 
@@ -24,6 +24,11 @@ const Login = () => {
     } catch (error) {
       console.log(error.code);
     }
+  };
+
+  const handleGoogleSignIn = async () => {
+    await loginWithGoogle();
+    navigate("/admon");
   };
 
   return (
@@ -50,6 +55,7 @@ const Login = () => {
 
         <button>Login</button>
       </form>
+      <button onClick={handleGoogleSignIn}>Ingresar con google</button>
     </div>
   );
 };

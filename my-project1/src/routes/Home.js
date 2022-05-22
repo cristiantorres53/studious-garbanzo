@@ -1,9 +1,18 @@
-import React from 'react'
+import { useFirestore } from "../hooks/useUrls";
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+  const { data, error, loading } = useFirestore();
 
-export default Home
+if(loading) return <p>Loading data...</p>
+if(error) return <p>{error}</p>
+
+  return <div>
+    {data.map(item=>(
+      <div key={item.nanoid}>
+        <p>{item.nanoid}</p>
+      </div>
+    ))}
+  </div>;
+};
+
+export default Home;

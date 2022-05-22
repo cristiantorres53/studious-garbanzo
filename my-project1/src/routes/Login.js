@@ -8,7 +8,7 @@ const Login = () => {
     password: "",
   });
 
-  const { login, loginWithGoogle } = useAuth();
+  const { login, loginWithGoogle, loginWithFacebook } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
 
@@ -30,6 +30,11 @@ const Login = () => {
     await loginWithGoogle();
     navigate("/admon");
   };
+
+  const handleFacebookSignIn =async()=>{
+    await loginWithFacebook();
+    navigate("/admon")
+  }
 
   return (
     <div>
@@ -56,6 +61,7 @@ const Login = () => {
         <button>Login</button>
       </form>
       <button onClick={handleGoogleSignIn}>Ingresar con google</button>
+      <button onClick={handleFacebookSignIn}>Ingresar con facebook</button>
     </div>
   );
 };

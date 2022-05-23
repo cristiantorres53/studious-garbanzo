@@ -31,10 +31,10 @@ const Login = () => {
     navigate("/admon");
   };
 
-  const handleFacebookSignIn =async()=>{
+  const handleFacebookSignIn = async () => {
     await loginWithFacebook();
-    navigate("/admon")
-  }
+    navigate("/admon");
+  };
 
   return (
     <div>

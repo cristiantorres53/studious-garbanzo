@@ -46,7 +46,14 @@ const AdmonPage = () => {
 
   const handleClickEdit = async (item) => {
     console.log("click editar");
+    setText(item.estado);
+    setText(item.precio);
     setText(item.categoria);
+    setText(item.descripcion);
+    setText(item.ubicacion);
+    setText(item.nHabitaciones);
+    setText(item.nBanos);
+    setText(item.nMetrosCuadrados);
   };
   // if (loading) return <h1>Cargando</h1>;
 

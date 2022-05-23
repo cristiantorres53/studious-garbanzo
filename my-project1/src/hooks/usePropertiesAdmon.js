@@ -86,11 +86,12 @@ export const useFirestore = () => {
     }
   };
 
-  const updateData = async (nanoid, newCategoria) => {
+  const updateData = async (nanoid, newEstado,newPrecio,newCategoria,newDescripcion, newUbicacion, newNHabitaciones, newNBanos, newNMetrosCuadrados) => {
     try {
       setLoading((prev) => ({ ...prev, updateData: true }));
       const docRef = doc(db, "properties", nanoid);
       await updateDoc(docRef, { categoria: newCategoria });
+      await updateDoc(docRef, { estado: newEstado})
     } catch (error) {
       console.log(error);
       setError(error.message);

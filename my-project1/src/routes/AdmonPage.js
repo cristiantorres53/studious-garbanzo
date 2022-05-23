@@ -133,7 +133,7 @@ const AdmonPage = () => {
           <div key={item.nanoid}>
             <Card style={{ width: "18rem" }}>
               <Card.Title>{item.estado}</Card.Title>
-              <Card.Img variant="top" src="holder.js/100px180" />
+              <Card.Img variant="top" >{item.img}</Card.Img>
               <Card.Title>{item.precio}</Card.Title>
               <Card.Body>
                 <Card.Text>{item.categoria}</Card.Text>

@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFirestore } from "../hooks/usePropertiesAdmon";
 
 import { Card } from "react-bootstrap";
 
 const CardPropertiesAdmon = () => {
+  const { data, error, loading, getData } = useFirestore();
 
-    const { data, error, loading } = useFirestore();
+  useEffect(() => {
+    console.log("getData");
+    getData();
+  }, []);
 
-    if (loading) return <p>Loading data...</p>;
-    if (error) return <p>{error}</p>;
+  const loadingData = loading.getData && <p>loading data...</p>
+  const errorData = error && <p>{error}</p>
 
   return (
     <div>
+      {loadingData}
+      {errorData}
       {data.map((item) => (
         <div key={item.nanoid}>
           <Card style={{ width: "18rem" }}>

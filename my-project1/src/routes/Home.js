@@ -1,6 +1,7 @@
 import { useFirestore } from "../hooks/usePropertiesPublic";
 
 import { Card } from "react-bootstrap";
+import LayoutHome from "../components/LayoutHome/LayoutHome";
 
 const Home = () => {
   const { data, error, loading } = useFirestore();
@@ -10,7 +11,7 @@ const Home = () => {
 
   return (
     <div>
-      Home
+      <LayoutHome/>
       {data.map((item) => (
         <div key={item.nanoid}>
           <Card style={{ width: "18rem" }}>

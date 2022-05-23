@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { Card, Form, Button } from "react-bootstrap";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -29,27 +30,29 @@ const Register = () => {
   return (
     <div>
       {error && <p>{error}</p>}
-      Register
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="ingrese su email"
-          onChange={handleChange}
-        />
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="ingrese el password"
-          id="password"
-          onChange={handleChange}
-        />
-
-        <button>Registrar</button>
-      </form>
+      <h1>Register</h1>
+      <Card style={{ width: "18rem" }}>
+        <form onSubmit={handleSubmit}>
+          <Card.Body>
+            <Card.Subtitle className="mb-2 text-muted">
+              Ingrese su correo
+            </Card.Subtitle>
+            <Form.Control type="email" name="email" onChange={handleChange} />
+            <Card.Subtitle className="mb-2 text-muted">
+              Ingrese su contraseña
+            </Card.Subtitle>
+            <Form.Control
+              type="password"
+              name="password"
+              onChange={handleChange}
+            />
+            <Button variant="success" type="submit">
+              Registrarse
+            </Button>
+          </Card.Body>
+        </form>
+      </Card>
     </div>
   );
 };

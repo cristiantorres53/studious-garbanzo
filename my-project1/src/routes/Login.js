@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { Card, Form, Button } from "react-bootstrap";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -39,29 +40,39 @@ const Login = () => {
   return (
     <div>
       {error && <p>{error}</p>}
-      Register
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="ingrese su email"
-          onChange={handleChange}
-        />
-
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="ingrese el password"
-          id="password"
-          onChange={handleChange}
-        />
-
-        <button>Login</button>
-      </form>
-      <button onClick={handleGoogleSignIn}>Ingresar con google</button>
-      <button onClick={handleFacebookSignIn}>Ingresar con facebook</button>
+      <h1>Login</h1>
+      <Card style={{ width: "18rem" }}>
+        <form onSubmit={handleSubmit}>
+          <Card.Body>
+            <Card.Subtitle className="mb-2 text-muted">
+              Ingrese su correo
+            </Card.Subtitle>
+            <Form.Control type="email" name="email" onChange={handleChange} />
+            <Card.Subtitle className="mb-2 text-muted">
+              Ingrese su contraseña
+            </Card.Subtitle>
+            <Form.Control
+              type="password"
+              name="password"
+              onChange={handleChange}
+            />
+            <Button variant="success" type="submit">
+              Ingresar
+            </Button>
+            <Button variant="ligth" type="submit" onClick={handleGoogleSignIn}>
+              Ingresar con Google
+            </Button>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={handleFacebookSignIn}
+            >
+              Ingresar con Facebook
+            </Button>
+            <Card.Link href="/Register">Registrarse</Card.Link>
+          </Card.Body>
+        </form>
+      </Card>
     </div>
   );
 };

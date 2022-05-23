@@ -6,10 +6,12 @@ import Register from "./routes/Register";
 import AdmonPage from "./routes/AdmonPage";
 import { AuthProvider } from "./context/authContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <div>
+      <NavBar/>
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Home />} />

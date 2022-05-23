@@ -13,11 +13,11 @@ import { nanoid } from "nanoid";
 export const useFirestore = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState({});
 
   const getData = async () => {
     try {
-      setLoading(true);
+      setLoading((prev) => ({ ...prev, getData: true }));
       const propertiesRef = collection(db, "properties");
       const q = query(propertiesRef, where("uid", "==", auth.currentUser.uid));
       const querySnapshot = await getDocs(q);
@@ -27,22 +27,23 @@ export const useFirestore = () => {
       console.log(error);
       setError(error.message);
     } finally {
-      setLoading(false);
+      setLoading((prev) => ({ ...prev, getData: false }));
     }
   };
 
   const addData = async (nBanos, nHabitaciones) => {
     try {
-      setLoading(true);
+      setLoading((prev) => ({ ...prev, addData: true }));
       const newDoc = {
         nBanos: nBanos,
         nHabitaciones: nHabitaciones,
         nanoid: nanoid(6),
+        uid: auth.currentUser.uid,
       };
 
       const docRef = doc(db, "properties", newDoc.nanoid);
       await setDoc(docRef, newDoc);
-      setData([...data, newDoc])
+      setData([...data, newDoc]);
       nanoid(8);
     } catch (error) {
       console.log(error);

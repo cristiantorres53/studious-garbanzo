@@ -1,5 +1,6 @@
 import {
   collection,
+  deleteDoc,
   doc,
   getDocs,
   query,
@@ -31,12 +32,29 @@ export const useFirestore = () => {
     }
   };
 
-  const addData = async (nBanos, nHabitaciones) => {
+  const addData = async (
+    estado,
+    precio,
+    categoria,
+    descripcion,
+    ubicacion,
+    nBanos,
+    nHabitaciones,
+    nMetrosCuadrados,
+    seguridadPrivada
+  ) => {
     try {
       setLoading((prev) => ({ ...prev, addData: true }));
       const newDoc = {
+        estado: estado,
+        precio: precio,
+        categoria: categoria,
+        descripcion: descripcion,
+        ubicacion: ubicacion,
         nBanos: nBanos,
         nHabitaciones: nHabitaciones,
+        nMetrosCuadrados: nMetrosCuadrados,
+        seguridadPrivada: seguridadPrivada,
         nanoid: nanoid(6),
         uid: auth.currentUser.uid,
       };
@@ -53,11 +71,26 @@ export const useFirestore = () => {
     }
   };
 
+  const deleteData = async (nanoid) => {
+    try {
+      setLoading((prev) => ({ ...prev, [nanoid]: true }));
+      const propertiesRef = collection(db, "properties", nanoid);
+      await deleteDoc(propertiesRef);
+      setData(data.filter((item) => item.nanoid !== nanoid));
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    } finally {
+      setLoading((prev) => ({ ...prev, [nanoid]: false }));
+    }
+  };
+
   return {
     data,
     error,
     loading,
     getData,
     addData,
+    deleteData,
   };
 };

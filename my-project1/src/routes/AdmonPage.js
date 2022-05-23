@@ -8,7 +8,8 @@ import { Card } from "react-bootstrap";
 
 const AdmonPage = () => {
   const { logout } = useAuth();
-  const { data, error, loading, getData, addData, deleteData } = useFirestore();
+  const { data, error, loading, getData, addData, deleteData, updateData } =
+    useFirestore();
   const [text, setText] = useState("");
   const [text1, setText1] = useState("");
   const [text2, setText2] = useState("");
@@ -30,7 +31,7 @@ const AdmonPage = () => {
     setText5("");
     setText6("");
     setText7("");
-    setText8("");
+    setText8(true);
     console.log(text8);
   };
 
@@ -39,9 +40,14 @@ const AdmonPage = () => {
   };
 
   const handleClickDelete = async (nanoid) => {
+    console.log("click delete");
     await deleteData(nanoid);
   };
 
+  const handleClickEdit = async (item) => {
+    console.log("click editar");
+    setText(item.categoria);
+  };
   // if (loading) return <h1>Cargando</h1>;
 
   useEffect(() => {
@@ -65,63 +71,50 @@ const AdmonPage = () => {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-
           <input
             placeholder="ingrese el precio"
             value={text1}
             type="number"
             onChange={(e) => setText1(e.target.value)}
           />
-
           <input
             placeholder="ingrese la categoria"
             value={text2}
             type="text"
             onChange={(e) => setText2(e.target.value)}
           />
-
           <input
             placeholder="ingrese la descripcion"
             value={text3}
             type="text"
             onChange={(e) => setText3(e.target.value)}
           />
-
           <input
             placeholder="ingrese la ubicacion"
             value={text4}
             type="text"
             onChange={(e) => setText4(e.target.value)}
           />
-
           <input
             placeholder="ingrese el numero de habitaciones"
             value={text5}
             type="number"
             onChange={(e) => setText5(e.target.value)}
           />
-
           <input
             placeholder="ingrese el numero de baños"
             value={text6}
             type="number"
             onChange={(e) => setText6(e.target.value)}
           />
-
           <input
             placeholder="ingrese el numero de metros cuadrados"
             value={text7}
             type="number"
             onChange={(e) => setText7(e.target.value)}
           />
-
-          <input
-            placeholder="seleccione si tiene seguridad privada"
-            value={text8}
-            type="checkbox"
-            checked="false"
-            onChange={(e) => setText8(e.target.value)}
-          />
+          
+          
           <button type="submit">enviar</button>
         </form>
       </div>
@@ -147,6 +140,9 @@ const AdmonPage = () => {
                   onClick={() => handleClickDelete(item.nanoid)}
                 >
                   Eliminar
+                </button>
+                <button type="button" onClick={() => handleClickEdit(item)}>
+                  Editar
                 </button>
               </Card.Body>
             </Card>

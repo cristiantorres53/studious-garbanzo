@@ -5,6 +5,7 @@ import {
   getDocs,
   query,
   setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { useState } from "react";
@@ -73,15 +74,28 @@ export const useFirestore = () => {
 
   const deleteData = async (nanoid) => {
     try {
-      setLoading((prev) => ({ ...prev, [nanoid]: true }));
-      const propertiesRef = collection(db, "properties", nanoid);
-      await deleteDoc(propertiesRef);
+      setLoading((prev) => ({ ...prev, deleteData: true }));
+      const docRef = doc(db, "properties", nanoid);
+      await deleteDoc(docRef);
       setData(data.filter((item) => item.nanoid !== nanoid));
     } catch (error) {
       console.log(error);
       setError(error.message);
     } finally {
-      setLoading((prev) => ({ ...prev, [nanoid]: false }));
+      setLoading((prev) => ({ ...prev, deleteData: false }));
+    }
+  };
+
+  const updateData = async (nanoid, newCategoria) => {
+    try {
+      setLoading((prev) => ({ ...prev, updateData: true }));
+      const docRef = doc(db, "properties", nanoid);
+      await updateDoc(docRef, { categoria: newCategoria });
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    } finally {
+      setLoading((prev) => ({ ...prev, updateData: false }));
     }
   };
 
@@ -92,5 +106,6 @@ export const useFirestore = () => {
     getData,
     addData,
     deleteData,
+    updateData,
   };
 };

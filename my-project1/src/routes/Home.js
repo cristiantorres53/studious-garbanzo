@@ -61,11 +61,10 @@ const Home = () => {
                 <Image src="https://res.cloudinary.com/dorkyjlu8/image/upload/v1653363141/reto-final-AG/MaskGroup1_dae94j.png"></Image>
                 <h6>{item.nMetrosCuadrados}</h6>
               </div>
-              
             </Card.Body>
           </Card>
 
-          <Modal show={show} onHide={handleClose} animation={false}>
+          <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>{item.descripcion}</Modal.Title>
             </Modal.Header>

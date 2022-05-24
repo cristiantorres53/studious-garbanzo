@@ -1,5 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
+import {FontAwesomeIcon}from '@fortawesome/react-fontawesome'
+
 
 const NavBar = () => {
   return (
@@ -38,6 +40,7 @@ const NavBar = () => {
             <Button variant="success" size="sm" href="/login">
               Add property
             </Button>
+            <FontAwesomeIcon icon="fa-regular fa-arrow-right" />
           </Navbar.Collapse>
         </Container>
       </Navbar>

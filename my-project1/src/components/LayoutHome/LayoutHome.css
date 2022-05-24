@@ -1,4 +1,8 @@
-.imagen1{
-    position:absolute;
-    margin-bottom: 50px;
+.img-layout{
+    position: relative;
+}
+
+.img-layout1{
+    position: relative;
+    padding-bottom: 50px;
 }
